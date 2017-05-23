@@ -1,0 +1,30 @@
+create proc NAME_SEARCH
+	@FirstName nvarchar(20) = 'blank',
+	@LastName nvarchar(20) = 'blank'
+as
+
+select PATIENTS.FIRST_NAME, PATIENTS.LAST_NAME, PATIENT_RECORDS.SUBMISSION_DATE,
+	PATIENT_RECORDS.DISCHARGE_DATE,
+case
+	when PATIENT_RECORDS.IS_DISCHARGED = 1 then 'yes'
+	else 'no'
+end as DISCHARGE_STATUS,
+TOTAL_BILLABLE
+
+into ##NAME_LIST from
+
+PATIENT_RECORDS join PATIENTS on PATIENT_RECORDS.PATIENT_ID = PATIENTS.ID
+
+join
+(select PATIENT_RECORDS_ID, sum(PRICE * QUANTITY) as TOTAL_BILLABLE
+from PATIENTS_BILLABLE_ITEMS group by PATIENT_RECORDS_ID) as TOTAL_TABLE
+on TOTAL_TABLE.PATIENT_RECORDS_ID = PATIENT_RECORDS.RECORDS_ID
+
+where FIRST_NAME = @FirstName and LAST_NAME = @LastName;
+
+if @@ROWCOUNT > 0
+select * from ##NAME_LIST
+else
+print 'Patient not found';
+
+drop table ##NAME_LIST;

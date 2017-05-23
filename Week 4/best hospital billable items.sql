@@ -1,0 +1,13 @@
+INSERT INTO PATIENTS_BILLABLE_ITEMS 
+(PATIENT_RECORDS_ID, ITEM_DESCRIPTION, PRICE, QUANTITY, NEEDS_PRESCRIPTION, ASSIGNED_BY_PRACTITIONER_ID)
+VALUES
+(2,'Sling Ring',20,1,0,1005),
+(3,'Manchurian Programming',50000,1,0,1003),
+(5,'ARC Reactor',100000,1,0,1001),
+(8,'Mechanical Arm (left)',200000,1,0,1004),
+(10,'Vicodin (300/5)',2.5,30,1,1002),
+(4,'Vicodin (300/5)',2.5,30,1,1002),
+(6,'Vicodin (300/5)',2.5,30,1,1002),
+(7,'Vicodin (300/5)',2.5,30,1,1002),
+(9,'Vicodin (300/5)',2.5,30,1,1002),
+(11,'Vicodin (300/5)',2.5,30,1,1002);

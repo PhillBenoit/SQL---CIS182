@@ -1,0 +1,1 @@
+create view VALIDATED_PATIENTS as select * from PATIENTS;
